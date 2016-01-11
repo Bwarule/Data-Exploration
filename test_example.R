@@ -7,7 +7,7 @@ Q4 = c(12.9,8.23,10.4))
 
 
 library(tidyr)
-gather(dataIn , "Quaters", "values", 3:6)
+dataIn_gather <- gather(dataIn , "Quaters", "values", 3:6)
 
    country  Measure Quaters values
 1       IN      GDP      Q1  12.00
@@ -22,3 +22,15 @@ gather(dataIn , "Quaters", "values", 3:6)
 10      IN      GDP      Q4  12.90
 11      IN INF_RATE      Q4   8.23
 12      PK      GDP      Q4  10.40
+
+dataIn_spread <- spread(dataIn_gather, "Measure", "values")
+dataIn_spread
+  country Quaters  GDP INF_RATE
+1      IN      Q1 12.0     7.80
+2      IN      Q2 12.4     8.00
+3      IN      Q3 12.3     7.28
+4      IN      Q4 12.9     8.23
+5      PK      Q1 10.0       NA
+6      PK      Q2 10.1       NA
+7      PK      Q3 10.2       NA
+8      PK      Q4 10.4       NA
