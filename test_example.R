@@ -23,6 +23,9 @@ dataIn_gather <- gather(dataIn , "Quaters", "values", 3:6)
 11      IN INF_RATE      Q4   8.23
 12      PK      GDP      Q4  10.40
 
+## In case if your data has duplicated rows 
+dataIn_gather <- dataIn_gather[!duplicated(dataIn_gather), ]
+
 dataIn_spread <- spread(dataIn_gather, "Measure", "values")
 dataIn_spread
   country Quaters  GDP INF_RATE
