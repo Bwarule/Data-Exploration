@@ -15,17 +15,3 @@ end_of_Month <- function(date) {
 	result = as.POSIXct(iso) - 86400 # subtract one day
 	result + (as.POSIXlt(iso)$isdst - as.POSIXlt(result)$isdst)*3600
 }
-
-book_ganesh <- read.csv("C:\\Users\\bharat.warule\\Desktop\\Book2_ganesh.csv", colClasses=c("Account.Id"="character"))
-book_ganesh$Account.Id <- as.character(book_ganesh$Account.Id)
-length(unique(book_ganesh$Account.Id))
-book_ganesh$Activity.Date_new <- 
-as.Date(as.character(book_ganesh$Activity.Date), format = "%m/%d/%Y")
-# aggregate can be used for this type of thing
-max_date = aggregate(book_ganesh$Activity.Date_new,by=list(book_ganesh$Account.Id),max)
-names(max_date) <- c("Account.Id","Activity.Date_new")
-### let merge the required data 
-df2 = merge(max_date,book_ganesh,by = c("Account.Id","Activity.Date_new"))
-dim(df2)
-head(df2)
-write.csv(df2,"Modified_data.csv",row.names = FALSE,quote =FALSE)
